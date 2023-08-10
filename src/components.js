@@ -27,44 +27,35 @@ export default (editor, opts = {}) => {
   }));
 
   domc.addType(cmpId, {
+    extend: "image",
     model: {
       defaults: opts.props({
         ...qrcodeProps,
-        tagName: "img",
         qrcodesrc: opts.script,
         droppable: false,
         traits,
-        script() {
-          const init = () => {
-            const qr = new QRious({
-              value: "{[ code ]}",
-              backgroundAlpha: 0,
-              foreground: "{[ foreground ]}",
-            });
-
-            this.src = qr.toDataURL();
-          };
-
-          if (!window.QRious) {
-            const scr = document.createElement("script");
-            scr.src = "{[ qrcodesrc ]}";
-            scr.onload = init;
-            document.body.appendChild(scr);
-          } else {
-            init();
-          }
-        },
         ...opts.qrcodeComponent,
       }),
 
       init() {
         const events = traits.map((i) => `change:${i.name}`).join(" ");
-        this.on(events, () => {
-          this.trigger("change:script");
-        });
+        this.on(events, this.generateQrcodeImage);
+        this.generateQrcodeImage();
+        this.afterInit();
       },
 
       afterInit() {},
+
+      generateQrcodeImage() {
+        const params = new URLSearchParams({
+          code: this.get("code"),
+          dark: this.get("foreground"),
+        });
+        this.set({ src: `${opts.api}?${params.toString()}` });
+      },
+    },
+    view: {
+      onActive(ev) {},
     },
   });
 };

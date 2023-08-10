@@ -4,6 +4,7 @@ export default {
   blocks: [cmpId],
   // default options
   script: "https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js",
+  api: "http://localhost:5000/api/v1/qrcodes",
   // Object to extend the default block, eg. `{ label: '', ... }`
   // Pass a falsy value to avoid adding the block
   blockQrcode: {},
