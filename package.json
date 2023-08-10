@@ -1,7 +1,7 @@
 {
   "name": "@documint/grapesjs-component-qrcode",
   "license": "MIT",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "QR code component for grapesjs",
   "author": "Documint",
   "main": "dist/grapesjs-component-qrcode.min.js",
