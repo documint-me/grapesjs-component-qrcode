@@ -48,10 +48,11 @@ export default (editor, opts = {}) => {
 
       generateQrcodeImage() {
         const params = new URLSearchParams({
-          code: this.get("code"),
           dark: this.get("foreground"),
         });
-        this.set({ src: `${opts.api}?${params.toString()}` });
+        this.set({
+          src: `${opts.api}?code=${this.get("code")}&${params.toString()}`,
+        });
       },
     },
     view: {
