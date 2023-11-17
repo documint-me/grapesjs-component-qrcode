@@ -5,9 +5,9 @@ export default (editor, opts = {}) => {
   const { keys } = Object;
 
   const qrcodeProps = {
-    code: "https://github.com/documint-me/grapesjs-component-qrcode",
-    foreground: "#000000",
-  };
+    code: 'https://documint.me/',
+    foreground: '#000000',
+  }
 
   const getTraitType = (value) => {
     if (typeof value == "number") return "number";
