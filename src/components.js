@@ -27,7 +27,7 @@ export default (editor, opts = {}) => {
   }));
 
   domc.addType(cmpId, {
-    extend: "image",
+    extend: 'image',
     model: {
       defaults: opts.props({
         ...qrcodeProps,
@@ -38,25 +38,25 @@ export default (editor, opts = {}) => {
       }),
 
       init() {
-        const events = traits.map((i) => `change:${i.name}`).join(" ");
-        this.on(events, this.generateQrcodeImage);
-        this.generateQrcodeImage();
-        this.afterInit();
+        const events = traits.map((i) => `change:${i.name}`).join(' ')
+        this.on(events, this.generateQrcodeImage)
+        this.generateQrcodeImage()
+        this.afterInit()
       },
 
       afterInit() {},
 
       generateQrcodeImage() {
         const params = new URLSearchParams({
-          dark: this.get("foreground"),
-        });
+          dark: this.get('foreground'),
+        })
         this.set({
-          src: `${opts.api}?code=${this.get("code")}&${params.toString()}`,
-        });
+          src: `${opts.api}?code=${this.get('code')}&${encodeURIComponent(params.toString())}`,
+        })
       },
     },
     view: {
-      onActive(ev) {},
+      onActive() {},
     },
-  });
+  })
 };
