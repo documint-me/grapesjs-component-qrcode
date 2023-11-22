@@ -1,8 +1,8 @@
-import { cmpId } from "./consts";
+import { cmpId } from './consts'
 
 export default (editor, opts = {}) => {
-  const domc = editor.DomComponents;
-  const { keys } = Object;
+  const domc = editor.DomComponents
+  const { keys } = Object
 
   const qrcodeProps = {
     code: 'https://documint.me/',
@@ -10,21 +10,21 @@ export default (editor, opts = {}) => {
   }
 
   const getTraitType = (value) => {
-    if (typeof value == "number") return "number";
-    if (typeof value == "boolean") return "checkbox";
-    if (typeof value == "object") return "select";
-    if (value.startsWith("#")) return "color";
-    return "text";
-  };
+    if (typeof value == 'number') return 'number'
+    if (typeof value == 'boolean') return 'checkbox'
+    if (typeof value == 'object') return 'select'
+    if (value.startsWith('#')) return 'color'
+    return 'text'
+  }
 
   const traits = keys(qrcodeProps).map((name) => ({
     changeProp: 1,
     type: getTraitType(qrcodeProps[name]),
     options: qrcodeProps[name],
     min: 0,
-    placeholder: "placeholder",
+    placeholder: 'placeholder',
     name,
-  }));
+  }))
 
   domc.addType(cmpId, {
     extend: 'image',
@@ -51,7 +51,7 @@ export default (editor, opts = {}) => {
           dark: this.get('foreground'),
         })
         this.set({
-          src: `${opts.api}?code=${this.get('code')}&${encodeURIComponent(params.toString())}`,
+          src: `${opts.api}?code=${encodeURIComponent(this.get('code'))}&${params.toString()}`,
         })
       },
     },
@@ -59,4 +59,4 @@ export default (editor, opts = {}) => {
       onActive() {},
     },
   })
-};
+}
